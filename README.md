@@ -5,3 +5,5 @@
 ### Basic Application Architecture
 
 - [System Architecture](architecture/python-Microservices.jpeg)
+
+![System Architecture](architecture/python-Microservices.jpeg)
