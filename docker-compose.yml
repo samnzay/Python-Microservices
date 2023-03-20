@@ -1,0 +1,20 @@
+version: "3.7"
+
+services:
+
+  mysql-db:
+    container_name: mysql-db
+    image: mysql:8.0
+    ports:
+      - 3306:3036
+    environment:
+      - MYSQL_DATABASE=${DB_DATABASE}
+      - MYSQL_USER=${DB_USERNAME}
+      - MYSQL_PASSWORD=${DB_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
+
+    volumes:
+      - database-data:/var/lib/mysql
+
+volumes:
+  database-data: ~
