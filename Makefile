@@ -15,6 +15,12 @@ mysql-execute:
 	docker run --network python-microservices-network -it --rm mysql mysql -hmysql-db -uroot -psecret 
 #   docker exec -i mysql-db bash < src/auth/init.sql
 #	mysql -u root -psecret
+
+mysql-start: ## Start the MySQL DB Container
+	docker start mysql-db
+
+mysql-stop: ## Start the MySQL DB Container without Destroying it.
+	docker stop mysql-db
 	
 mysql-destroy:
 	docker rm -vf mysql-db
@@ -32,6 +38,12 @@ mongo-shell: ## MongoShell for terminal interaction with Mongo DB
 mongo-destroy: ##Destroy Mondo DB Container
 	docker rm -vf mongo-db
 #	docker network rm db-network
+
+mongo-start: ## Start the MySQL DB Container
+	docker start mongo-db
+
+mongo-stop: ## Start the MySQL DB Container without Destroying it.
+	docker stop mongo-db
 
 
 #========MONGO GUI CLIENT=======
