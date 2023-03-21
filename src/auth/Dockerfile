@@ -6,10 +6,13 @@ RUN apt-get update \
     && pip install --no-cache-dir --upgrade pip
 
 WORKDIR /app
+#If you are running build command for this service use this COPY command to avoid context error.
+COPY ./src/auth/requirements.txt /app
+#in case you are running command in same directory use thsi COPY command instead.
 
-COPY ./requirements.txt /app
+## COPY ./requirements.txt /app
 
-RUN pip install --no-cahe-dir --requirement /app/requirements.txt
+RUN pip install --no-cache-dir --requirement /app/requirements.txt
 
 COPY . /app
 

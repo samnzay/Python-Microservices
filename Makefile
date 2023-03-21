@@ -55,10 +55,17 @@ mongo-gui-destroy: ## Destroy Mongo GUI Client Container
 	docker rm -vf  MongoGUI-Client
 #	docker network rm db-network
 
+
 ##======AUTHENTICATION SERVICE======
 
 auth-freeze: ## frezee the auth requirements into "requirements.txt" file
 	pip3 freeze > requirements.txt
 
 auth-build: ## Build "auth" service as docker image
-	docker build --tag auth-service:latest -f src/auth/Dockerfile .
+	docker build --tag auth-service:v1.0.0 -f src/auth/Dockerfile .
+
+auth-tag: ## Tag "auth" service to push into DockerHub
+	docker tag auth-service samnzay/auth-service:v1.0.0
+
+auth-push: ## Push auth-service image to image repository. eg: DockerHub
+	docker push samnzay/auth-service:v1.0.0
