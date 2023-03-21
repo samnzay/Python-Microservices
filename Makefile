@@ -54,3 +54,11 @@ mongo-gui-setup: ## spin up Mondo DB Container
 mongo-gui-destroy: ## Destroy Mongo GUI Client Container
 	docker rm -vf  MongoGUI-Client
 #	docker network rm db-network
+
+##======AUTHENTICATION SERVICE======
+
+auth-freeze: ## frezee the auth requirements into "requirements.txt" file
+	pip3 freeze > requirements.txt
+
+auth-build: ## Build "auth" service as docker image
+	docker build --tag auth-service:latest -f src/auth/Dockerfile .
