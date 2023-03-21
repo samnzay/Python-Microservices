@@ -13,8 +13,12 @@ COPY ./src/auth/requirements.txt /app
 ## COPY ./requirements.txt /app
 
 RUN pip install --no-cache-dir --requirement /app/requirements.txt
+#in case you are running command in same directory use thsi COPY command instead.
+#COPY . /app
 
-COPY . /app
+#But If you are running Docker commands with "make" file for  a whole microservices build automation 
+# as I did for this service specify the context to avoid context error.
+COPY ./src/auth/. /app
 
 EXPOSE 5000
 

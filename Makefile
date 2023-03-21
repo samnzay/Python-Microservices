@@ -58,14 +58,34 @@ mongo-gui-destroy: ## Destroy Mongo GUI Client Container
 
 ##======AUTHENTICATION SERVICE======
 
-auth-freeze: ## frezee the auth requirements into "requirements.txt" file
-	pip3 freeze > requirements.txt
-
 auth-build: ## Build "auth" service as docker image
-	docker build --tag auth-service:v1.0.0 -f src/auth/Dockerfile .
+	docker build --tag auth-service:v1.0.4 -f src/auth/Dockerfile .
 
 auth-tag: ## Tag "auth" service to push into DockerHub
-	docker tag auth-service samnzay/auth-service:v1.0.0
+	docker tag auth-service:v1.0.4 samnzay/auth-service:v1.0.4
 
 auth-push: ## Push auth-service image to image repository. eg: DockerHub
-	docker push samnzay/auth-service:v1.0.0
+	docker push samnzay/auth-service:v1.0.4
+
+auth-deploy: ## Deploy Auth service into kubernetes cluster. Local Minikube cluster in our case.
+	kubectl apply -f ./src/auth/manifests/
+
+#=======GatewayAPI Service=======
+
+
+
+
+
+
+
+#========K9s INSTALL=============
+k9s:
+	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+	(echo; echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"') >> /home/h2s/.bashrc
+
+	eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
+	brew doctor
+
+#===========================
