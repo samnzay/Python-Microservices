@@ -72,6 +72,10 @@ auth-deploy: ## Deploy Auth service into kubernetes cluster. Local Minikube clus
 
 #=======GatewayAPI Service=======
 
+	
+gateway-freeze: ## Export app dependencies to requirements file
+	pip3 freeze > src/gateway/requirements.txt 
+
 
 
 
