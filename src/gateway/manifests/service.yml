@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service # Think a Service as a group of Pods that are Labeled with sam Label. 
+              #They all live in same Umblella of Service thatis labeled same name
+              
+metadata:
+  name: gateway
+
+spec:
+  selector:
+    name: gateway
+  type: ClusterIP
+  ports:
+    - port: 8080
+      targetPort: 8080
+      protocol: TCP
