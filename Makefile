@@ -70,25 +70,40 @@ auth-push: ## Push auth-service image to image repository. eg: DockerHub
 auth-deploy: ## Deploy Auth service into kubernetes cluster. Local Minikube cluster in our case.
 	kubectl apply -f ./src/auth/manifests/
 
+auth-destroy: ## Delete Auth service resources into kubernetes cluster. Local Minikube cluster in our case.
+	kubectl delete -f ./src/auth/manifests/
+
 #=======GatewayAPI Service=======
 
 	
 gateway-freeze: ## Export app dependencies to requirements file
 	pip3 freeze > src/gateway/requirements.txt 
 
-gateway-build: ## Build "auth" service as docker image
-	docker build --tag gateway-service:v1.0.0 -f src/gateway/Dockerfile .
+gateway-build: ## Build "gateway" service as docker image
+	docker build --tag gateway-service:v1.0.1 -f src/gateway/Dockerfile .
 
-gateway-tag: ## Tag "auth" service to push into DockerHub
-	docker tag gateway-service:v1.0.0 samnzay/gateway-service:v1.0.0
+gateway-tag: ## Tag "gateway" service to push into DockerHub
+	docker tag gateway-service:v1.0.1 samnzay/gateway-service:v1.0.1
 
-gateway-push: ## Push auth-service image to image repository. eg: DockerHub
-	docker push samnzay/gateway-service:v1.0.0
+gateway-push: ## Push gateway-service image to image repository. eg: DockerHub
+	docker push samnzay/gateway-service:v1.0.1
 
-gateway-deploy: ## Deploy Auth service into kubernetes cluster. Local Minikube cluster in our case.
+gateway-deploy: ## Deploy Gateway service into kubernetes cluster. Local Minikube cluster in our case.
 	kubectl apply -f ./src/gateway/manifests/
 
+gateway-destroy: ## Delete Gateway service resources into kubernetes cluster. Local Minikube cluster in our case.
+	kubectl delete -f ./src/gateway/manifests/
 
+#=======Rabbitmq Service=======
+
+rabbitmq-deploy: ## Deploy Auth service into kubernetes cluster. Local Minikube cluster in our case.
+	kubectl apply -f ./src/rabbitmq/manifests/
+
+rabbitmq-destroy: ## Delete all Auth service resources into kubernetes cluster. Local Minikube cluster in our case.
+	kubectl delete -f ./src/rabbitmq/manifests/
+
+rabbitmq-pvc: ## Describe Persistent Volume Claim
+	kubectl describe pvc
 
 
 
