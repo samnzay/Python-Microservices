@@ -99,6 +99,10 @@ gateway-destroy: ## Delete Gateway service resources into kubernetes cluster. Lo
 rabbitmq-deploy: ## Deploy Auth service into kubernetes cluster. Local Minikube cluster in our case.
 	kubectl apply -f ./src/rabbitmq/manifests/
 
+rabbitmq-ui: ## Port forward the RabbitMQ UI	
+	kubectl port-forward rabbitmq-0 15672:15672
+
+
 rabbitmq-destroy: ## Delete all Auth service resources into kubernetes cluster. Local Minikube cluster in our case.
 	kubectl delete -f ./src/rabbitmq/manifests/
 
@@ -106,14 +110,34 @@ rabbitmq-pvc: ## Describe Persistent Volume Claim
 	kubectl describe pvc
 
 
+#======CONVERTER===============
+converter-freeze: ## Export app dependencies to requirements file
+	pip3 freeze > src/converter/requirements.txt 
+
+converter-build: ## Build "converter" service as docker image
+	docker build --tag converter-service:v1.0.0 -f src/converter/Dockerfile .
+
+converter-tag: ## Tag "converter" service to push into DockerHub
+	docker tag converter-service:v1.0.0 samnzay/converter-service:v1.0.0
+
+converter-push: ## Push converter-service image to image repository. eg: DockerHub
+	docker push samnzay/converter-service:v1.0.0
+
+converter-deploy: ## Deploy converter service into kubernetes cluster. Local Minikube cluster in our case.
+	kubectl apply -f ./src/converter/manifests/
+
+converter-destroy: ## Delete converter service resources into kubernetes cluster. Local Minikube cluster in our case.
+	kubectl delete -f ./src/converter/manifests/
+
+
 
 
 
 #========K9s INSTALL=============
 k9s:
-	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+#	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-	(echo; echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"') >> /home/h2s/.bashrc
+#	(echo; echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"') >> /home/h2s/.bashrc
 
 	eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
