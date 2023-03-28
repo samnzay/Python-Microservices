@@ -3,13 +3,16 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: rabbitmq-ingress
+  #namespace: default
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
   #namespace: ingress-nginx
 spec:
   rules:
     - host: rabbitmq-manager.com
       http:
         paths:
-          - path: '/'
+          - path: /
             pathType: Prefix
             backend:
               service:

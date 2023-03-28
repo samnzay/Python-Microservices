@@ -2,11 +2,13 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: gateway-ingress
+  namespace: default
   annotations:
     nginx.ingress.kubernetes.io/proxy-body-size: "0"
     nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
     nginx.ingress.kubernetes.io/proxy-send-timout: "600"
     #nginx.ingress.kubernetes.io/proxy-max-temp-file-size: "1024m"
+    #kubernetes.io/ingress.class: "nginx"
 
 spec:
   rules:

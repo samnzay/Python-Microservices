@@ -8,10 +8,12 @@ help: ## Print help
 
 #==========MySQL==============
 mysql-setup: ## Setup mysql Database
-#	docker network create python-microservices-network
+	docker network create python-microservices-network
 	docker run --network python-microservices-network -d -v ~/.db-data/mysql:/var/lib/mysql --name mysql-db -p 3307:3306 -e MYSQL_ROOT_PASSWORD=secret mysql
+#	docker run -d -v ~/.db-data/mysql:/var/lib/mysql --name mysql-db -p 3307:3306 -e MYSQL_ROOT_PASSWORD=secret mysql
 	
 mysql-execute:
+#	docker run -it --rm mysql mysql -hmysql-db -uroot -psecret 
 	docker run --network python-microservices-network -it --rm mysql mysql -hmysql-db -uroot -psecret 
 #   docker exec -i mysql-db bash < src/auth/init.sql
 #	mysql -u root -psecret
@@ -30,7 +32,8 @@ mysql-destroy:
 #==========MONGO DB============
 
 mongo-setup: ## spin up Mondo DB
-	docker run --network python-microservices-network -d ~/.db-data/mongo:/data/db -p 27017:27017 --name mongo-db mongo:6
+#	docker run -d -v ~/.db-data/mongo:/data/db -p 27017:27017 --name mongo-db mongo:6
+	docker run --network python-microservices-network -d -v ~/.db-data/mongo:/data/db -p 27017:27017 --name mongo-db mongo:6
 
 mongo-shell: ## MongoShell for terminal interaction with Mongo DB
 	docker exec -it mongo-db mongosh
