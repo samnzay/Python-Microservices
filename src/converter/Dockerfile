@@ -12,4 +12,4 @@ RUN pip install --no-cache-dir --requirement /app/requirements.txt
 COPY ./src/converter/. /app
 
 
-CMD ["python3", "consummer.py"]
+CMD ["python3", "consummer.py"] 

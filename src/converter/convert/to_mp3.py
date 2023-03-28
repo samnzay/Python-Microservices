@@ -6,12 +6,10 @@ import moviepy.editor
 def start(message, fs_videos, fs_mp3s, channel):
     message = json.loads(message)
 
-
     # Empty temp file
     tf = tempfile.NamedTemporaryFile()
 
     # Video Contents
-
     out = fs_videos.get(ObjectId(message["video_fid"]))
 
     #Add video content to empty file
@@ -21,13 +19,11 @@ def start(message, fs_videos, fs_mp3s, channel):
     audio = moviepy.editor.VideoFileClip(tf.name).audio
     tf.close
 
-
     #Write Audio to the File
     tf_path = tempfile.gettempdir()+ f"/{message['video_fid']}.mp3"
     audio.write_audiofile(tf_path)
 
     #Save File to MongoDB
-
     f = open(tf_path, "rb")
     data = f.read()
     fid = fs_mp3s.put(data)
@@ -35,7 +31,8 @@ def start(message, fs_videos, fs_mp3s, channel):
     os.remove(tf_path)
 
     message["mp3_fid"] = str(fid)
-
+    
+    # Publish Message to Queue Service When Mp3 file is Finished
     try:
         channel.basic_publish(
             exchange="",
@@ -47,4 +44,4 @@ def start(message, fs_videos, fs_mp3s, channel):
         )
     except Exception as err:
         fs_mp3s.delete(fid)
-        return {"Ooops! failed to publish message", err}
+        return ("Ooops! failed to publish message", err)
