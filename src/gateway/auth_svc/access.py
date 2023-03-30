@@ -6,10 +6,12 @@ def login(request):
         return None, ("Ooops, missing credentials!", 401)
     
     basicAuth =(auth.username, auth.password)
+    print("Received you credentials")
 
     response = requests.post(
         f"http://{os.environ.get('AUTH_SVC_ADDRESS')}/login", auth=basicAuth
     )
+    print("Response Recieved from Auth-services")
 
     if response.status_code == 200:
         return response.text, None

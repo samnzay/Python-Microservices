@@ -2,7 +2,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: gateway-ingress
-  namespace: default
+  #namespace: default
   annotations:
     nginx.ingress.kubernetes.io/proxy-body-size: "0"
     nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
@@ -12,13 +12,12 @@ metadata:
 
 spec:
   rules:
-    - host: mp3converter.com # Any external request that Hit this domain. 
-            # this domain is configured in "/etc/hosts" in our local machine, to route traffics into our kubenetes Cluster that is running on local machine.
+    - host: mp3converter.com
       http:
         paths:
-          - path: / # At this path
+          - path: /
             pathType: Prefix
-            backend: # The request Will be routed to below "gateway" Service that runs at the specified port 8080
+            backend:
               service: 
                 name: gateway
                 port: 

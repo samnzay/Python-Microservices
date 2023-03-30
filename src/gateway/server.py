@@ -41,6 +41,8 @@ def upload():
     if err:
         return err
     
+    access = json.loads(access)
+
     if access["admin"]:
         if len(request.files) > 1 or len(request.files) < 1:
             return "exactly 1 file required", 400

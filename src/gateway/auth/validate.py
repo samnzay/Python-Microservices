@@ -5,7 +5,7 @@ def token(request):
     if not "Authorization" in request.headers:
         return None, ("missing credentials", 401)
     
-    token = request.headers["Autorization"]
+    token = request.headers["Authorization"]
 
     if not token:
         return None, ("missing credentials", 401)

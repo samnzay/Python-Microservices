@@ -8,7 +8,7 @@ help: ## Print help
 
 #==========MySQL==============
 mysql-setup: ## Setup mysql Database
-	docker network create python-microservices-network
+#   docker network create python-microservices-network
 	docker run --network python-microservices-network -d -v ~/.db-data/mysql:/var/lib/mysql --name mysql-db -p 3307:3306 -e MYSQL_ROOT_PASSWORD=secret mysql
 #	docker run -d -v ~/.db-data/mysql:/var/lib/mysql --name mysql-db -p 3307:3306 -e MYSQL_ROOT_PASSWORD=secret mysql
 	
@@ -62,13 +62,13 @@ mongo-gui-destroy: ## Destroy Mongo GUI Client Container
 ##======AUTHENTICATION SERVICE======
 
 auth-build: ## Build "auth" service as docker image
-	docker build --tag auth-service:v1.0.4 -f src/auth/Dockerfile .
+	docker build --tag auth-service:v1.0.13 -f src/auth/Dockerfile .
 
 auth-tag: ## Tag "auth" service to push into DockerHub
-	docker tag auth-service:v1.0.4 samnzay/auth-service:v1.0.4
+	docker tag auth-service:v1.0.13 samnzay/auth-service:v1.0.13
 
 auth-push: ## Push auth-service image to image repository. eg: DockerHub
-	docker push samnzay/auth-service:v1.0.4
+	docker push samnzay/auth-service:v1.0.13
 
 auth-deploy: ## Deploy Auth service into kubernetes cluster. Local Minikube cluster in our case.
 	kubectl apply -f ./src/auth/manifests/
@@ -83,13 +83,13 @@ gateway-freeze: ## Export app dependencies to requirements file
 	pip3 freeze > src/gateway/requirements.txt 
 
 gateway-build: ## Build "gateway" service as docker image
-	docker build --tag gateway-service:v1.0.1 -f src/gateway/Dockerfile .
+	docker build --tag gateway-service:v1.0.3 -f src/gateway/Dockerfile .
 
 gateway-tag: ## Tag "gateway" service to push into DockerHub
-	docker tag gateway-service:v1.0.1 samnzay/gateway-service:v1.0.1
+	docker tag gateway-service:v1.0.3 samnzay/gateway-service:v1.0.3
 
 gateway-push: ## Push gateway-service image to image repository. eg: DockerHub
-	docker push samnzay/gateway-service:v1.0.1
+	docker push samnzay/gateway-service:v1.0.3
 
 gateway-deploy: ## Deploy Gateway service into kubernetes cluster. Local Minikube cluster in our case.
 	kubectl apply -f ./src/gateway/manifests/
