@@ -24,7 +24,7 @@ spec:
     spec:
       containers:
         - name: auth
-          image: samnzay/auth-service
+          image: samnzay/auth-service:v1.0.13
           ports:
             - containerPort: 5000
           envFrom:

@@ -83,13 +83,13 @@ gateway-freeze: ## Export app dependencies to requirements file
 	pip3 freeze > src/gateway/requirements.txt 
 
 gateway-build: ## Build "gateway" service as docker image
-	docker build --tag gateway-service:v1.0.3 -f src/gateway/Dockerfile .
+	docker build --tag gateway-service:v1.0.6 -f src/gateway/Dockerfile .
 
 gateway-tag: ## Tag "gateway" service to push into DockerHub
-	docker tag gateway-service:v1.0.3 samnzay/gateway-service:v1.0.3
+	docker tag gateway-service:v1.0.6 samnzay/gateway-service:v1.0.6
 
 gateway-push: ## Push gateway-service image to image repository. eg: DockerHub
-	docker push samnzay/gateway-service:v1.0.3
+	docker push samnzay/gateway-service:v1.0.6
 
 gateway-deploy: ## Deploy Gateway service into kubernetes cluster. Local Minikube cluster in our case.
 	kubectl apply -f ./src/gateway/manifests/

@@ -9,21 +9,20 @@ from storage import util
 from bson.objectid import ObjectId
 
 server = Flask(__name__)
-server.config["MONGO_URI"] = "mongodb://host.minikube.internal:27017/videos"
-
-mongo = PyMongo(server)
-
-fs = gridfs.GridFS(mongo.db)
-
-connection= pika.BlockingConnection(pika.ConnectionParameters("rabbitmq"))
-channel = connection.channel()
 
 mongo_video = PyMongo(server, uri="mongodb://host.minikube.internal:27017/videos")
 
 mongo_mp3 = PyMongo(server, uri="mongodb://host.minikube.internal:27017/mp3s")
 
+#mongo = PyMongo(server)
+#server.config["MONGO_URI"] = "mongodb://host.minikube.internal:27017"
+#fs = gridfs.GridFS(mongo.db)
+
 fs_videos = gridfs.GridFS(mongo_video.db)
 fs_mp3s = gridfs.GridFS(mongo_mp3.db)
+
+connection= pika.BlockingConnection(pika.ConnectionParameters("rabbitmq"))
+channel = connection.channel()
 
 
 @server.route("/login", methods=["POST"])
@@ -52,7 +51,7 @@ def upload():
 
             if err:
                 return err
-        return "success!", 200
+        return "Upload Success...!", 200
     else:
         return "not authorized", 401
 
@@ -66,7 +65,7 @@ def download():
     access = json.loads(access)
 
     if access["admin"]:
-        fid_string = request.args.get("fid")
+        fid_string = request.args.get("fid") # Check file ID within the request
 
         if not fid_string:
             return "fid is required", 400

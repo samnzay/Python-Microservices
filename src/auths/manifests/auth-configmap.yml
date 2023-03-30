@@ -7,6 +7,6 @@ metadata:
 ## remember this is not meant for sensitive data like passwords!!
 data:
   MYSQL_HOST: host.minikube.internal
-  MYSQL_USER: auth_user
+  MYSQL_USER: root
   MYSQL_DB: auth
   MYSQL_PORT: "3307"

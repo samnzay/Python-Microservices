@@ -8,7 +8,7 @@ def upload(f, fs, channel, access):
     except Exception as err:
         #Return err if uplaod into db failed.
         print(err)
-        return "internal server error", 500
+        return "Failed to Write file Into MongoBD, internal server error", 500
     
     message = {
         "video_fid": str(fid),
@@ -31,4 +31,4 @@ def upload(f, fs, channel, access):
         print(err)
         fs.delete(fid)
 
-        return "Internal server Error", 500
+        return "Failed to Publish message To Queue Service. Try Again", 500
