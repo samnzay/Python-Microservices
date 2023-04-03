@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
         - name: notification
-          image: samnzay/notification-service:v1.0.0
+          image: samnzay/notification-service:v1.0.1
           envFrom:
             - configMapRef:
                 name: notification-configmap

@@ -15,7 +15,8 @@ def notification(message): #message from our Queue
         msg["From"] = sender_address
         msg["To"] = receiver_address
 
-        session = smtplib.SMTP("smtp.gmail.com", 587)
+        session = smtplib.SMTP("smtp.gmail.com", 465)
+        session.ehlo()
         session.starttls
         session.login(sender_address, sender_password)
         session.send_message(msg, sender_address, receiver_address)
