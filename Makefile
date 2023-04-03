@@ -6,7 +6,7 @@ help: ## Print help
 
 
 
-#==========MySQL==============
+#==========MySQL OUTSIDE CLUSTER==============
 mysql-setup: ## Setup mysql Database
 #   docker network create python-microservices-network
 	docker run --network python-microservices-network -d -v ~/.db-data/mysql:/var/lib/mysql --name mysql-db -p 3307:3306 -e MYSQL_ROOT_PASSWORD=secret mysql
@@ -29,7 +29,7 @@ mysql-destroy:
 #	docker network rm db-network
 
 
-#==========MONGO DB============
+#==========MONGO DB OUTSIDE CLUSTER============
 
 mongo-setup: ## spin up Mondo DB
 #	docker run -d -v ~/.db-data/mongo:/data/db -p 27017:27017 --name mongo-db mongo:6
@@ -132,6 +132,26 @@ converter-deploy: ## Deploy converter service into kubernetes cluster. Local Min
 converter-destroy: ## Delete converter service resources into kubernetes cluster. Local Minikube cluster in our case.
 	kubectl delete -f ./src/converter/manifests/
 
+
+
+#======NOTIFICATION SERVICE===========
+notif-freeze: ## Export app dependencies to requirements file
+	pip3 freeze > src/notification/requirements.txt 
+
+notif-build: ## Build "notification" service as docker image
+	docker build --tag notification-service:v1.0.0 -f src/notification/Dockerfile .
+
+notif-tag: ## Tag "notification" service to push into DockerHub
+	docker tag notification-service:v1.0.0 samnzay/notification-service:v1.0.0
+
+notif-push: ## Push notification-service image to image repository. eg: DockerHub
+	docker push samnzay/notification-service:v1.0.0
+
+notif-deploy: ## Deploy notification service into kubernetes cluster. Local Minikube cluster in our case.
+	kubectl apply -f ./src/notification/manifests/
+
+notif-destroy: ## Delete notification service resources into kubernetes cluster. Local Minikube cluster in our case.
+	kubectl delete -f ./src/notification/manifests/
 
 
 

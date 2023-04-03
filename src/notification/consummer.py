@@ -5,7 +5,7 @@ def main():
 
     #RABBITMQ CONNECTION
     connection = pika.BlockingConnection(
-        pika.ConnectionParameters(host="rabbitmq")
+        pika.ConnectionParameters(host="rabbitmq")# Service name in Kubernetes resolves to the Host
         )
     channel = connection.channel()
 

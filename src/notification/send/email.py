@@ -1,7 +1,7 @@
 import smtplib, os,json
 from email.message import EmailMessage
 
-def notification(message):
+def notification(message): #message from our Queue
     try:
         message = json.loads(message)
         mp3_fid = message["mp3_fid"]
