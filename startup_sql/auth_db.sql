@@ -1,9 +1,19 @@
-USE users;
-CREATE table employees (id int not null, email text, passwrd text, primary key(id));
+DROP USER auth_user;
+DROP DATABASE auth;
+CREATE USER 'root'@'127.0.0.1:3307' IDENTIFIED BY 'secret';
 
-INSERT into employees (id, email, passwrd) VALUES (1, 'samnzay@gmail.com', 'mysecret');
 
-commit;
+CREATE DATABASE auth;
 
-SELECT * FROM employees;
-commit;
+GRANT ALL PRIVILEGES ON auth.* TO 'root'@'127.0.0.1:3307';
+FLUSH PRIVILEGES;
+
+USE auth;
+
+CREATE TABLE user (
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    passwrd VARCHAR(255) NOT NULL
+);
+
+INSERT INTO user (email, password) VALUES ('email@gmail.com','Admin123');

@@ -27,7 +27,7 @@ You would need to install any one tool for creating a Kubernetes cluster - KubeO
 1. [Install and Set Up kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) directly on top of Docker desktop - For Windows/macOS
 2. [Install Minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/) - For Linux/macOS
 
-#### A.4. make
+#### A.4. Make
 1. [Install Make on Windows](https://linuxhint.com/install-use-make-windows/)
 2. [Install Make on Linux](https://linuxhint.com/install-use-make-ubuntu/)
 
