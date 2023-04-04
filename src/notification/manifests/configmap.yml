@@ -4,7 +4,4 @@ metadata:
   name: notification-configmap
 data:
   MP3_QUEUE: "mp3"
-  VIDEO_QUEUE: "video"
-  GMAIL_ADDRESS: "your@gmail.com"
   
-

@@ -139,13 +139,13 @@ notif-freeze: ## Export app dependencies to requirements file
 	pip3 freeze > src/notification/requirements.txt 
 
 notif-build: ## Build "notification" service as docker image
-	docker build --tag notification-service:v1.0.1 -f src/notification/Dockerfile .
+	docker build --tag notification-service:v1.0.4 -f src/notification/Dockerfile .
 
 notif-tag: ## Tag "notification" service to push into DockerHub
-	docker tag notification-service:v1.0.1 samnzay/notification-service:v1.0.1
+	docker tag notification-service:v1.0.4 samnzay/notification-service:v1.0.4
 
 notif-push: ## Push notification-service image to image repository. eg: DockerHub
-	docker push samnzay/notification-service:v1.0.1
+	docker push samnzay/notification-service:v1.0.4
 
 notif-deploy: ## Deploy notification service into kubernetes cluster. Local Minikube cluster in our case.
 	kubectl apply -f ./src/notification/manifests/
