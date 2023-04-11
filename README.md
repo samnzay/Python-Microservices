@@ -8,7 +8,38 @@
 
 ![System Architecture](architecture/python-Microservices.jpeg)
 
-#### Video To MP3 Conversion Flow (`coming soon`)
+#### Video To MP3 Conversion Flow:
+
+1. User Submit Video upload Request with Credentials through The ```API Gateway```.
+
+2. The User Get Authenticated by the ```Auth Service``` .
+
+3. Once Submitted Credentials are valid, the Auth Service resturn a JWT Token to the user to Access Services.
+
+4. Video File is stored into ```Dynamo DB``` .
+
+5. A Message is `produced` and stored into ```Message Queue Service``` [in the queue named `video` for example] containing the ID of the Video File.
+
+- When storing messages fails, the video file will be deleted as it will never be consumed, and return the Error.
+
+6. The ```MP3 Converter Service``` consume the message from the Queue identified by Unique ID.
+
+7. The ```MP3 Converter Service``` checks and retrieves a video to be converted into mp3, from Dynamo DB, identified by same ID of the Message.
+
+8. The finished `MP3 file` is stored into Dynamo DB. 
+
+9. A Message is `produced` and stored into Message Queue Service, [ In the queue named `mp3` for example ].
+
+    - When storing messages fails, the mp3 file will be deleted as it will never be consumed, and notify for the Error.
+
+10. ```Notification Service``` Consumes the message from the `mp3` queue. To Notify User (`Client`) the MP3 file is available for Download.
+
+    - When storing messages fails, the mp3 file will be deleted as it will never be consumed, and return the Error.
+
+11. The ```Notification Service``` sends email message tho the user (`Client`) including the ID of the MP3 file ready to be downloaded.
+
+12. The User (`Client`) Finally makes MP3 download request.
+
 
 ### A. Dependencies
 
