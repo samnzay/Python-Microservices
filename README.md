@@ -2,7 +2,7 @@
 
 ## VIDEO TO MP3 CONVERSION MICROSERVICES
 
-### Basic Application Architecture
+### A. Basic Application Architecture
 
 - [System Architecture](architecture/python-Microservices.jpeg)
 
@@ -41,34 +41,34 @@
 12. The User (`Client`) Finally makes MP3 download request.
 
 
-### A. Dependencies
+### B. Dependencies
 
-#### A.1. Python
+#### B.1. Python
 [Download and install the python](https://www.python.org/downloads/).
 
-#### A.2. Docker Desktop
+#### B.2. Docker Desktop
 You would require you to install Docker Desktop to create containers for individual microservices. Refer the following links for instructions 
 * [macOS](https://docs.docker.com/docker-for-mac/install/), 
 * [Windows 10 64-bit: Pro, Enterprise, or Education](https://docs.docker.com/docker-for-windows/install/), 
 * [Windows  10 64-bit Home](https://docs.docker.com/toolbox/toolbox_install_windows/). 
 * You can find installation instructions for other operating systems at:  https://docs.docker.com/install/
 
-#### A.3. Kubernetes 
+#### B.3. Kubernetes 
 You would need to install any one tool for creating a Kubernetes cluster - KubeOne / Minikube / kubectl on top of Docker Desktop:
 1. [Install and Set Up kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) directly on top of Docker desktop - For Windows/macOS
 2. [Install Minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/) - For Linux/macOS
 
-#### A.4. Make
+#### B.4. Make
 1. [Install Make on Windows](https://linuxhint.com/install-use-make-windows/)
 2. [Install Make on Linux](https://linuxhint.com/install-use-make-ubuntu/)
 
-#### Project Setup Instructions:
+### C. Project Setup Instructions:
 
 
 Once Docker, Minikube, Kubernetes and Optionally K9s for Containers management are Installed in your PC, let's set it up.
 
 
-##### DATABASES SETUP (MySQL & MongoDB):
+##### C.1. DATABASES SETUP (MySQL & MongoDB):
 
 To Avoid flooding your PC with a lot of intallations on physical hardware, I prefer to run `MyQL and MongoDB` inside containers, but you can do it diffefently if you want.
 
@@ -83,7 +83,7 @@ Run in terminal: ```make mysql-setup``` you can refer to the `Makefile` for othe
 Run in terminal: ```make mongo-setup``` you can refer to the `Makefile` for other commands.
 
 
-##### KUBERNETES CLUSTER SETUP :
+##### C.2. KUBERNETES CLUSTER SETUP :
 
 3. Start Minikube
     - Run in your terminal ```minikube start```
@@ -98,7 +98,7 @@ Run in terminal: ```make mongo-setup``` you can refer to the `Makefile` for othe
 5. If you have K9s installed to manage your cluster Containers (`Optional`): Run this in your terminal ```k9s```.
 
 
-##### DEPLOY OUR APP SERVICES :
+##### C.3. DEPLOY OUR APP SERVICES :
 
 While Inside the Root Project Directory
 
