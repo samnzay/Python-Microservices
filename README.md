@@ -64,11 +64,12 @@ You would need to install any one tool for creating a Kubernetes cluster - KubeO
 
 #### Project Setup Instructions:
 
+
 Once Docker, Minikube, Kubernetes and Optionally K9s for Containers management are Installed in your PC, let's set it up.
 
-....
-DATABASES SETUP (MySQL & MongoDB):
-=================================
+
+##### DATABASES SETUP (MySQL & MongoDB):
+
 To Avoid flooding your PC with a lot of intallations on physical hardware, I prefer to run `MyQL and MongoDB` inside containers, but you can do it diffefently if you want.
 
 1. MYSQL:
@@ -82,8 +83,7 @@ Run in terminal: ```make mysql-setup``` you can refer to the `Makefile` for othe
 Run in terminal: ```make mongo-setup``` you can refer to the `Makefile` for other commands.
 
 
-KUBERNETES CLUSTER SETUP :
-=========================
+##### KUBERNETES CLUSTER SETUP :
 
 3. Start Minikube
     - Run in your terminal ```minikube start```
@@ -98,8 +98,8 @@ KUBERNETES CLUSTER SETUP :
 5. If you have K9s installed to manage your cluster Containers (`Optional`): Run this in your terminal ```k9s```.
 
 
-DEPLOY OUR APP SERVICES :
-=========================
+##### DEPLOY OUR APP SERVICES :
+
 While Inside the Root Project Directory
 
 DEPLOY `API-GATEWAY` : Run in terminal ```make gateway-deploy```.
