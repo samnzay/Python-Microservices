@@ -20,7 +20,7 @@
 
 5. A Message is `produced` and stored into ```Message Queue Service``` [in the queue named `video` for example] containing the ID of the Video File.
 
-- When storing messages fails, the video file will be deleted as it will never be consumed, and return the Error.
+    - When storing messages fails, the video file will be deleted as it will never be consumed, and return the Error.
 
 6. The ```MP3 Converter Service``` consume the message from the Queue identified by Unique ID.
 
