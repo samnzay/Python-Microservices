@@ -156,7 +156,7 @@ notif-destroy: ## Delete notification service resources into kubernetes cluster.
 
 
 
-#========K9s INSTALL=============
+#========K9s INSTALL IN LINUX=============
 k9s:
 #	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 

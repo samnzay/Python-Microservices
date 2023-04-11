@@ -62,4 +62,58 @@ You would need to install any one tool for creating a Kubernetes cluster - KubeO
 1. [Install Make on Windows](https://linuxhint.com/install-use-make-windows/)
 2. [Install Make on Linux](https://linuxhint.com/install-use-make-ubuntu/)
 
-#### Project Setup Instructions (`coming soon`)
+#### Project Setup Instructions:
+
+Once Docker, Minikube, Kubernetes and Optionally K9s for Containers management are Installed in your PC, let's set it up.
+
+....
+DATABASES SETUP (MySQL & MongoDB):
+=================================
+To Avoid flooding your PC with a lot of intallations on physical hardware, I prefer to run `MyQL and MongoDB` inside containers, but you can do it diffefently if you want.
+
+1. MYSQL:
+
+Run in terminal: ```make mysql-setup``` you can refer to the `Makefile` for other commands.
+
+- Run the initial.sql to Create MySQL User, Necessary permissions, tables and Insert initial data into tables.
+
+2. MongoDB:
+
+Run in terminal: ```make mongo-setup``` you can refer to the `Makefile` for other commands.
+
+
+KUBERNETES CLUSTER SETUP :
+=========================
+
+3. Start Minikube
+    - Run in your terminal ```minikube start```
+    - Enable Ingress Addon: ````minikube addons enable ingress```
+    - Check currently running ingress in `default` namespace: ```kubectl get ingress -n default`` The ingress and their IP will be returned.
+
+4. Configure custom domains in your local host. Map the above Ingress IP in the `sudo nano /etc/hosts`
+
+    eg: #192.168.49.2 mp3converter.com -> To hit the API Gateway.
+        #192.168.49.2 rabbitmq-manager.com -> For RabbitMQ UI
+
+5. If you have K9s installed to manage your cluster Containers (`Optional`): Run this in your terminal ```k9s```.
+
+
+DEPLOY OUR APP SERVICES :
+=========================
+While Inside the Root Project Directory
+
+DEPLOY `API-GATEWAY` : Run in terminal ```make gateway-deploy```.
+
+DEPLOY `AUTH-SERVICE` : Run in terminal ```make auth-deploy```.
+
+DEPLOY `MESSAGE-QUEUE` SERVICE : Run in terminal ```make rabbitmq-deploy```.
+
+DEPLOY `CONVERTER-SERVICE` : Run in terminal ```make converter-deploy```.
+
+DEPLOY `NOTIFICATION-SERVICE` : Run in terminal ```make notif-deploy```.
+
+- You can check additional commands in the *[Makefile](Makefile) for the individual service.
+
+6. Check the status, logs of each container in K9s.
+
+
