@@ -30,7 +30,7 @@
 
 9. A Message is `produced` and stored into Message Queue Service, [ In the queue named `mp3` for example ].
 
-    - When storing messages fails, the mp3 file will be deleted as it will never be consumed, and notify for the Error.
+    - When storing messages fails, the mp3 file will be deleted as it will never be consumed, and return the Error.
 
 10. ```Notification Service``` Consumes the message from the `mp3` queue. To Notify User (`Client`) the MP3 file is available for Download.
 
