@@ -14,7 +14,7 @@
 
 2. The User Get Authenticated by the ```Auth Service``` .
 
-3. Once Submitted Credentials are valid, the Auth Service resturn a JWT Token to the user to Access Services.
+3. Once Submitted Credentials are valid, the Auth Service return a JWT Token to the User(`Client`) to Access Services.
 
 4. Video File is stored into ```Dynamo DB``` .
 
