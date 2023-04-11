@@ -10,7 +10,7 @@
 
 #### A.1. Video To MP3 Conversion Flow:
 
-1. User Submit Video upload Request with Credentials through The ```API Gateway```.
+1. User((`Client`) Submit a Video upload Request with Credentials through The ```API Gateway```.
 
 2. The User Get Authenticated by the ```Auth Service``` .
 
