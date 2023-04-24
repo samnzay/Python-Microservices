@@ -87,8 +87,8 @@ Run in terminal: ```make mongo-setup``` you can refer to the `Makefile` for othe
 
 3. Start Minikube
     - Run in your terminal ```minikube start```
-    - Enable Ingress Addon: ````minikube addons enable ingress```
-    - Check currently running ingress in `default` namespace: ```kubectl get ingress -n default`` The ingress and their IP will be returned.
+    - Enable Ingress Addon: ```minikube addons enable ingress```
+    - Check currently running ingress in `default` namespace: ```kubectl get ingress -n default``` The ingress and their IP will be returned.
 
 4. Configure custom domains in your local host. Map the above Ingress IP in the `sudo nano /etc/hosts`
 
